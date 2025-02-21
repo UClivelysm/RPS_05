@@ -185,12 +185,100 @@ public class RockPaperScissorsFrame extends JFrame {
 
         });
 
+        playPaperBtn = new JButton("Play Paper!");
+        playPaperBtn.setFont(new Font("Ubuntu Bold", Font.PLAIN, 20));
+        playPaperBtn.addActionListener((ActionEvent ae) ->
+        {
+            displayTA.append("You Played Paper!\n");
+
+
+
+            int playerMove = 2;
+
+            int currentMode = modeChooser.nextInt(5) + 1;
+//            int currentMode = 5;
+            if(currentMode == 1) {
+                int botOut = ComputerPlayer.ModeOne();
+
+                if (botOut == 1) {
+                    displayTA.append("Computer Played Rock! (Random)\n");
+                    displayTA.append("You Win\n\n");
+                } else if (botOut == 2) {
+                    displayTA.append("Computer Played Paper! (Random)\n");
+                    displayTA.append("Draw!\n\n");
+                } else {
+                    displayTA.append("Computer Played Scissors! (Random)\n");
+                    displayTA.append("You Lose!\n\n");
+                }
+            } else if (currentMode == 2) {
+                int botOut = ComputerPlayer.ModeTwo(firstLastMove);
+
+                if (botOut == 1) {
+                    displayTA.append("Computer Played Rock! (Last Used)\n");
+                    displayTA.append("You Win\n\n");
+                } else if (botOut == 2) {
+                    displayTA.append("Computer Played Paper! (Last Used)\n");
+                    displayTA.append("Draw!\n\n");
+                } else {
+                    displayTA.append("Computer Played Scissors! (Last Used)\n");
+                    displayTA.append("You Lose!\n\n");
+                }
+            } else if (currentMode == 3) {
+                int botOut = ComputerPlayer.ModeThree(playerMove);
+
+                if (botOut == 1) {
+                    displayTA.append("Computer Played Rock! (Cheat Sometimes)\n");
+                    displayTA.append("You Win\n\n");
+                } else if (botOut == 2) {
+                    displayTA.append("Computer Played Paper! (Cheat Sometimes)\n");
+                    displayTA.append("Draw!\n\n");
+                } else {
+                    displayTA.append("Computer Played Scissors! (Cheat Sometimes)\n");
+                    displayTA.append("You Lose!\n\n");
+                }
+            } else if (currentMode == 4) {
+                int botOut = ComputerPlayer.ModeFour(firstLastMove, secondLastMove, thirdLastMove);
+
+                if (botOut == 1) {
+                    displayTA.append("Computer Played Rock! (Most Used)\n");
+                    displayTA.append("You Win\n\n");
+                } else if (botOut == 2) {
+                    displayTA.append("Computer Played Paper! (Most Used)\n");
+                    displayTA.append("Draw!\n\n");
+                } else {
+                    displayTA.append("Computer Played Scissors! (Most Used)\n");
+                    displayTA.append("You Lose!\n\n");
+                }
+            } else if (currentMode == 5) {
+                int botOut = ComputerPlayer.ModeFive(firstLastMove, secondLastMove, thirdLastMove);
+
+                if (botOut == 1) {
+                    displayTA.append("Computer Played Rock! (Least Used)\n");
+                    displayTA.append("You Win\n\n");
+                } else if (botOut == 2) {
+                    displayTA.append("Computer Played Paper! (Least Used)\n");
+                    displayTA.append("Draw!\n\n");
+                } else {
+                    displayTA.append("Computer Played Scissors! (Least Used)\n");
+                    displayTA.append("You Lose!\n\n");
+                }
+            }
+
+            thirdLastMove = secondLastMove;
+            secondLastMove = firstLastMove;
+            firstLastMove = playerMove;
+
+        });
+
+
+
 
         quitBtn = new JButton("Quit!");
         quitBtn.setFont(new Font("Ubuntu Thin", Font.PLAIN, 20));
         quitBtn.addActionListener((ActionEvent ae) -> System.exit(0));
 
         controlPnl.add(playRockBtn);
+        controlPnl.add(playPaperBtn);
         controlPnl.add(quitBtn);
 
     }
