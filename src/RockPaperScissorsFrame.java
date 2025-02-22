@@ -32,6 +32,10 @@ public class RockPaperScissorsFrame extends JFrame {
 
     JLabel titleLbl;
     ImageIcon icon;
+    ImageIcon rockIcon;
+    ImageIcon paperIcon;
+    ImageIcon scissorsIcon;
+
 
     JButton playRockBtn;
     JButton playPaperBtn;
@@ -85,7 +89,6 @@ public class RockPaperScissorsFrame extends JFrame {
     private void createIconPanel()
     {
         iconPnl = new JPanel();
-//        icon = new ImageIcon("src/Wizard.png");
         titleLbl = new JLabel("Welcome to Rock paper scisors", icon, JLabel.CENTER);
         titleLbl.setFont(new Font("Ubuntu", Font.PLAIN, 36));
         // Obscure code to align the text to the Icon!
@@ -110,21 +113,18 @@ public class RockPaperScissorsFrame extends JFrame {
 
     private void createControlPanel()
     {
-        int boarderPadding = 10;
-        EmptyBorder paddingBorder = new EmptyBorder(boarderPadding, boarderPadding, boarderPadding, boarderPadding);
-        LineBorder lineBorder = new LineBorder(Color.BLACK);
-        CompoundBorder compoundBorder = new CompoundBorder(lineBorder, paddingBorder);
-        EmptyBorder outerPadding = new EmptyBorder(boarderPadding, boarderPadding, boarderPadding, boarderPadding);
-        CompoundBorder compoundBorder2 = new CompoundBorder(outerPadding, compoundBorder);
+
 
 
 
         controlPnl = new JPanel();
         controlPnl.setLayout(new GridLayout(1, 4));
 
-        playRockBtn = new JButton("Play Rock!");
-        playRockBtn.setFont(new Font("Ubuntu Bold", Font.PLAIN, 20));
-        playRockBtn.setIcon(new ImageIcon("Images/rock.png"));
+        rockIcon = new ImageIcon("Images/rock.png");
+        playRockBtn = new JButton(rockIcon);
+//        playRockBtn.setFont(new Font("Ubuntu Bold", Font.PLAIN, 20));
+
+//        playRockBtn.setIcon(rockIcon);
         playRockBtn.addActionListener((ActionEvent ae) ->
         {
 
@@ -179,7 +179,8 @@ public class RockPaperScissorsFrame extends JFrame {
 
         playPaperBtn = new JButton("Play Paper!");
         playPaperBtn.setFont(new Font("Ubuntu Bold", Font.PLAIN, 20));
-        playRockBtn.setIcon(new ImageIcon("Images/paper.png"));
+        paperIcon = new ImageIcon("Images/paper.png");
+        playRockBtn.setIcon(paperIcon);
         playPaperBtn.addActionListener((ActionEvent ae) ->
         {
 
@@ -223,7 +224,8 @@ public class RockPaperScissorsFrame extends JFrame {
 
         playScissorsBtn = new JButton("Play Scissors!");
         playScissorsBtn.setFont(new Font("Ubuntu Bold", Font.PLAIN, 20));
-        playScissorsBtn.setIcon(new ImageIcon("Images/paper.png"));
+        scissorsIcon = new ImageIcon("Images/scissors.png");
+        playScissorsBtn.setIcon(scissorsIcon);
         playScissorsBtn.addActionListener((ActionEvent ae) ->
         {
 
@@ -274,6 +276,14 @@ public class RockPaperScissorsFrame extends JFrame {
         controlPnl.add(playPaperBtn);
         controlPnl.add(playScissorsBtn);
         controlPnl.add(quitBtn);
+
+        int boarderPadding = 10;
+        EmptyBorder paddingBorder = new EmptyBorder(boarderPadding, boarderPadding, boarderPadding, boarderPadding);
+        LineBorder lineBorder = new LineBorder(Color.BLACK);
+        CompoundBorder compoundBorder = new CompoundBorder(lineBorder, paddingBorder);
+        EmptyBorder outerPadding = new EmptyBorder(boarderPadding, boarderPadding, boarderPadding, boarderPadding);
+        CompoundBorder compoundBorder2 = new CompoundBorder(outerPadding, compoundBorder);
+
         controlPnl.setBorder(compoundBorder2);
 
     }
