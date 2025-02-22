@@ -124,93 +124,52 @@ public class RockPaperScissorsFrame extends JFrame {
 
         playRockBtn = new JButton("Play Rock!");
         playRockBtn.setFont(new Font("Ubuntu Bold", Font.PLAIN, 20));
-        playRockBtn.setIcon(new ImageIcon("images/rock.png"));
+        playRockBtn.setIcon(new ImageIcon("Images/rock.png"));
         playRockBtn.addActionListener((ActionEvent ae) ->
         {
-//            displayTA.append("You Played Rock!\n");
 
 
-//Spaghetti
             int playerMove = 1;
+            int botOut = 0;
+            String winner = "";
+            int winnerLogic;
+
 
             int currentMode = modeChooser.nextInt(5) + 1;
 //            int currentMode = 5;
             if(currentMode == 1) {
-                int botOut = ComputerPlayer.ModeOne();
-                if (botOut == 1) {
-                    displayTA.append("Two Rocks Tie! (Draw, Random)\n");
-//                    displayTA.append("Draw\n\n");
-                    draws++;
-                } else if (botOut == 2) {
-                    displayTA.append("Paper beats Rock! (CPU Wins, Random)\n");
-//                    displayTA.append("You Lose!\n\n");
-                    losses++;
-                } else {
-                    displayTA.append("Rock crushes Scissors! (Player Wins, Random)\n");
-//                    displayTA.append("You Win!\n\n");
-                    wins++;
-                }
+                botOut = ComputerPlayer.ModeOne();
+
             } else if (currentMode == 2) {
-                int botOut = ComputerPlayer.ModeTwo(firstLastMove);
-                if (botOut == 1) {
-                    displayTA.append("Two Rocks Tie! (Draw, Last Used)\n");
-//                    displayTA.append("Draw\n\n");
-                    draws++;
-                } else if (botOut == 2) {
-                    displayTA.append("Paper beats Rock! (CPU Wins, Last Used)\n");
-//                    displayTA.append("You Lose!\n\n");
-                    losses++;
-                } else {
-                    displayTA.append("Rock crushes Scissors! (Player Wins, Last Used)\n");
-//                    displayTA.append("You Win!\n\n");
-                    wins++;
-                }
+                botOut = ComputerPlayer.ModeTwo(firstLastMove);
+
             } else if (currentMode == 3) {
-                int botOut = ComputerPlayer.ModeThree(playerMove);
-                if (botOut == 1) {
-                    displayTA.append("Two Rocks Tie! (Draw, Cheat Sometimes)\n");
-//                    displayTA.append("Draw\n\n");
-                    draws++;
-                } else if (botOut == 2) {
-                    displayTA.append("Paper beats Rock! (CPU Wins, Cheat Sometimes)\n");
-//                    displayTA.append("You Lose!\n\n");
-                    losses++;
-                } else {
-                    displayTA.append("Rock crushes Scissors! (Player Wins, Cheat Sometimes)\n");
-//                    displayTA.append("You Win!\n\n");
-                    wins++;
-                }
+                botOut = ComputerPlayer.ModeThree(playerMove);
+
             } else if (currentMode == 4) {
-                int botOut = ComputerPlayer.ModeFour(firstLastMove, secondLastMove, thirdLastMove);
-                if (botOut == 1) {
-                    displayTA.append("Two Rocks Tie! (Draw, Most Used)\n");
-//                    displayTA.append("Draw\n\n");
-                    draws++;
-                } else if (botOut == 2) {
-                    displayTA.append("Paper beats Rock! (CPU Wins, Most Used)\n");
-//                    displayTA.append("You Lose!\n\n");
-                    losses++;
-                } else {
-                    displayTA.append("Rock crushes Scissors! (Player Wins, Most Used)\n");
-//                    displayTA.append("You Win!\n\n");
-                    wins++;
-                }
+                botOut = ComputerPlayer.ModeFour(firstLastMove, secondLastMove, thirdLastMove);
+
             } else if (currentMode == 5) {
-                int botOut = ComputerPlayer.ModeFive(firstLastMove, secondLastMove, thirdLastMove);
-                if (botOut == 1) {
-                    displayTA.append("Two Rocks Tie! (Draw, Least Used)\n");
-//                    displayTA.append("Draw\n\n");
-                    draws++;
-                } else if (botOut == 2) {
-                    displayTA.append("Paper beats Rock! (CPU Wins, Least Used)\n");
-//                    displayTA.append("You Lose!\n\n");
-                    losses++;
-                } else {
-                    displayTA.append("Rock crushes Scissors! (Player Wins, Least Used)\n");
-//                    displayTA.append("You Win!\n\n");
-                    wins++;
-                }
+                botOut = ComputerPlayer.ModeFive(firstLastMove, secondLastMove, thirdLastMove);
+
             }
+//            System.out.println(playerMove);
+//            System.out.println(botOut);
+//            System.out.println(currentMode);
+            winner = Decider.PickWinner(playerMove, botOut, currentMode);
+            displayTA.append(winner);
+
+            winnerLogic = Decider.PickWinnerLogic(playerMove, botOut);
+            if (winnerLogic == 1){
+                wins++;
+            } else if (winnerLogic == 2){
+                losses++;
+            } else if (winnerLogic == 0){
+                draws++;
+            }
+
+
+
 
             thirdLastMove = secondLastMove;
             secondLastMove = firstLastMove;
@@ -220,97 +179,83 @@ public class RockPaperScissorsFrame extends JFrame {
 
         playPaperBtn = new JButton("Play Paper!");
         playPaperBtn.setFont(new Font("Ubuntu Bold", Font.PLAIN, 20));
+        playRockBtn.setIcon(new ImageIcon("Images/paper.png"));
         playPaperBtn.addActionListener((ActionEvent ae) ->
         {
-            displayTA.append("You Played Paper!\n");
-
 
 
             int playerMove = 2;
+            int botOut = 0;
+            String winner = "";
+
 
             int currentMode = modeChooser.nextInt(5) + 1;
 //            int currentMode = 5;
             if(currentMode == 1) {
-                int botOut = ComputerPlayer.ModeOne();
+                botOut = ComputerPlayer.ModeOne();
 
-                if (botOut == 1) {
-                    displayTA.append("Computer Played Rock! (Random)\n");
-                    displayTA.append("You Win\n\n");
-                    wins++;
-                } else if (botOut == 2) {
-                    displayTA.append("Computer Played Paper! (Random)\n");
-                    displayTA.append("Draw!\n\n");
-                    draws++;
-                } else {
-                    displayTA.append("Computer Played Scissors! (Random)\n");
-                    displayTA.append("You Lose!\n\n");
-                    losses++;
-                }
             } else if (currentMode == 2) {
-                int botOut = ComputerPlayer.ModeTwo(firstLastMove);
+                botOut = ComputerPlayer.ModeTwo(firstLastMove);
 
-                if (botOut == 1) {
-                    displayTA.append("Computer Played Rock! (Last Used)\n");
-                    displayTA.append("You Win\n\n");
-                    wins++;
-                } else if (botOut == 2) {
-                    displayTA.append("Computer Played Paper! (Last Used)\n");
-                    displayTA.append("Draw!\n\n");
-                    draws++;
-                } else {
-                    displayTA.append("Computer Played Scissors! (Last Used)\n");
-                    displayTA.append("You Lose!\n\n");
-                    losses++;
-                }
             } else if (currentMode == 3) {
-                int botOut = ComputerPlayer.ModeThree(playerMove);
+                botOut = ComputerPlayer.ModeThree(playerMove);
 
-                if (botOut == 1) {
-                    displayTA.append("Computer Played Rock! (Cheat Sometimes)\n");
-                    displayTA.append("You Win\n\n");
-                    wins++;
-                } else if (botOut == 2) {
-                    displayTA.append("Computer Played Paper! (Cheat Sometimes)\n");
-                    displayTA.append("Draw!\n\n");
-                    draws++;
-                } else {
-                    displayTA.append("Computer Played Scissors! (Cheat Sometimes)\n");
-                    displayTA.append("You Lose!\n\n");
-                    losses++;
-                }
             } else if (currentMode == 4) {
-                int botOut = ComputerPlayer.ModeFour(firstLastMove, secondLastMove, thirdLastMove);
+                botOut = ComputerPlayer.ModeFour(firstLastMove, secondLastMove, thirdLastMove);
 
-                if (botOut == 1) {
-                    displayTA.append("Computer Played Rock! (Most Used)\n");
-                    displayTA.append("You Win\n\n");
-                    wins++;
-                } else if (botOut == 2) {
-                    displayTA.append("Computer Played Paper! (Most Used)\n");
-                    displayTA.append("Draw!\n\n");
-                    draws++;
-                } else {
-                    displayTA.append("Computer Played Scissors! (Most Used)\n");
-                    displayTA.append("You Lose!\n\n");
-                    losses++;
-                }
             } else if (currentMode == 5) {
-                int botOut = ComputerPlayer.ModeFive(firstLastMove, secondLastMove, thirdLastMove);
+                botOut = ComputerPlayer.ModeFive(firstLastMove, secondLastMove, thirdLastMove);
 
-                if (botOut == 1) {
-                    displayTA.append("Computer Played Rock! (Least Used)\n");
-                    displayTA.append("You Win\n\n");
-                    wins++;
-                } else if (botOut == 2) {
-                    displayTA.append("Computer Played Paper! (Least Used)\n");
-                    displayTA.append("Draw!\n\n");
-                    draws++;
-                } else {
-                    displayTA.append("Computer Played Scissors! (Least Used)\n");
-                    displayTA.append("You Lose!\n\n");
-                    losses++;
-                }
             }
+//            System.out.println(playerMove);
+//            System.out.println(botOut);
+//            System.out.println(currentMode);
+            winner = Decider.PickWinner(playerMove, botOut, currentMode);
+            displayTA.append(winner);
+
+            thirdLastMove = secondLastMove;
+            secondLastMove = firstLastMove;
+            firstLastMove = playerMove;
+
+        });
+
+
+
+        playScissorsBtn = new JButton("Play Scissors!");
+        playScissorsBtn.setFont(new Font("Ubuntu Bold", Font.PLAIN, 20));
+        playScissorsBtn.setIcon(new ImageIcon("Images/paper.png"));
+        playScissorsBtn.addActionListener((ActionEvent ae) ->
+        {
+
+
+            int playerMove = 3;
+            int botOut = 0;
+            String winner = "";
+
+
+            int currentMode = modeChooser.nextInt(5) + 1;
+//            int currentMode = 5;
+            if(currentMode == 1) {
+                botOut = ComputerPlayer.ModeOne();
+
+            } else if (currentMode == 2) {
+                botOut = ComputerPlayer.ModeTwo(firstLastMove);
+
+            } else if (currentMode == 3) {
+                botOut = ComputerPlayer.ModeThree(playerMove);
+
+            } else if (currentMode == 4) {
+                botOut = ComputerPlayer.ModeFour(firstLastMove, secondLastMove, thirdLastMove);
+
+            } else if (currentMode == 5) {
+                botOut = ComputerPlayer.ModeFive(firstLastMove, secondLastMove, thirdLastMove);
+
+            }
+//            System.out.println(playerMove);
+//            System.out.println(botOut);
+//            System.out.println(currentMode);
+            winner = Decider.PickWinner(playerMove, botOut, currentMode);
+            displayTA.append(winner);
 
             thirdLastMove = secondLastMove;
             secondLastMove = firstLastMove;
@@ -327,6 +272,7 @@ public class RockPaperScissorsFrame extends JFrame {
 
         controlPnl.add(playRockBtn);
         controlPnl.add(playPaperBtn);
+        controlPnl.add(playScissorsBtn);
         controlPnl.add(quitBtn);
         controlPnl.setBorder(compoundBorder2);
 
