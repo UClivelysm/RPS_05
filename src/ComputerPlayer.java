@@ -1,4 +1,8 @@
 import java.util.Random;
+
+/**
+ * This is the class file with the different computer strategies.
+ */
 public class ComputerPlayer {
     /*
     1 = rock
@@ -7,12 +11,24 @@ public class ComputerPlayer {
      */
 
     //random return
+
+    /**
+     *
+     * @return
+     */
     public static int ModeOne() {
         Random rand = new Random();
         return rand.nextInt(3) + 1; // This will generate a random number between 1 and 3 (inclusive)
     }
 
+
     //last used
+
+    /**
+     *
+     * @param playerLast
+     * @return
+     */
     public static int ModeTwo(int playerLast) {
         if (playerLast != 0) {
             return playerLast;
@@ -21,28 +37,39 @@ public class ComputerPlayer {
         }
     }
 
-    //cheat sometimes, else random
+
+    //cheat sometimes
+
+    /**
+     *
+     * @param playerCurrent
+     * @return
+     */
     public static int ModeThree(int playerCurrent) {
         Random rand = new Random();
-        if (rand.nextInt(9) == 0) {
-            if (playerCurrent == 1){
-                System.out.println("oops, I cheated");
-                return 2;
-            } else if (playerCurrent == 2){
-                System.out.println("oops, I cheated");
-                return 3;
-            } else if (playerCurrent == 3){
-                System.out.println("oops, I cheated");
-                return 1;
-            } else {
-                return ModeOne();
-            }
+
+        if (playerCurrent == 1){
+            return 2;
+        } else if (playerCurrent == 2){
+            return 3;
+        } else if (playerCurrent == 3){
+            return 1;
         } else {
             return ModeOne();
         }
+
     }
 
+
     //most used
+
+    /**
+     *
+     * @param firstLast
+     * @param secondLast
+     * @param thirdLast
+     * @return
+     */
     public static int ModeFour(int firstLast, int secondLast, int thirdLast) {
         //if rock(1) most, chose paper
         if ((firstLast == 1 && secondLast == 1) || (firstLast == 1 && thirdLast == 1) || (secondLast == 1 && thirdLast == 1)) {
@@ -58,7 +85,16 @@ public class ComputerPlayer {
         }
     }
 
+
     //least used
+
+    /**
+     *
+     * @param firstLast
+     * @param secondLast
+     * @param thirdLast
+     * @return
+     */
     public static int ModeFive(int firstLast, int secondLast, int thirdLast) {
         //if rock(1) least, chose paper
         if (firstLast != 1 && secondLast != 1 && thirdLast != 1) {
